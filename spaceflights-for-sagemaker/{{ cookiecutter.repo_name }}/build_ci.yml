@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      
+      - pip3 install -r ./src/requirements.txt
+      # Install additional requirements for CI
+      - pip3 install pylint
+      
+      # Pass n to decline analytics collection
+      - yes n | kedro test
