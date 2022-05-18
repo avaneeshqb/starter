@@ -26,3 +26,10 @@ python_package:
   error_message: |
     It must start with a letter or underscore, be at least 2 characters long
     and contain only letters, digits, and/or underscores.
+
+ecr_repo:
+  title: "ECR Repo link"
+  text: |
+    Please enter the link of ECR Repo you'd like to build your code to. 
+  regex_validator: (?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*|<INSERT-ECR-REPO-NAME>
+  error_message: The name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, periods and forward slashes.
