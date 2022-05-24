@@ -21,6 +21,10 @@ phases:
 
       # View the images for debugging purposes
       - docker images
+
+      # Move pipeline definition to S3 and deploy template
+      - aws s3 cp pipeline.json s3://$ARTIFACT_BUCKET/
+      - aws cloudformation deploy --template-file template.yaml --parameter-overrides S3BucketName=$ARTIFACT_BUCKET
   post_build:
     commands:
       - echo Pushing the Docker image...
