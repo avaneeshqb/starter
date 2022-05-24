@@ -24,7 +24,7 @@ phases:
 
       # Move pipeline definition to S3 and deploy template
       - aws s3 cp pipeline.json s3://$ARTIFACT_BUCKET/
-      - aws cloudformation deploy --template-file template.yaml --parameter-overrides S3BucketName=$ARTIFACT_BUCKET
+      - aws cloudformation deploy --template-file template.yaml --parameter-overrides S3BucketName=$ARTIFACT_BUCKET --capabilities CAPABILITY_IAM
   post_build:
     commands:
       - echo Pushing the Docker image...

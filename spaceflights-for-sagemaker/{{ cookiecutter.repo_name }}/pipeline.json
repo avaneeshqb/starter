@@ -12,7 +12,7 @@
    },
    "Steps":[
       {
-         "Name":"Kedro DE",
+         "Name":"Kedro-DE",
          "Type":"Processing",
          "Arguments":{
             "ProcessingResources":{
@@ -36,7 +36,7 @@
          }
       },
       {
-         "Name":"Kedro DS",
+         "Name":"Kedro-DS",
          "Type":"Processing",
          "Arguments":{
             "ProcessingResources":{
@@ -59,7 +59,7 @@
             }
          },
          "DependsOn":[
-            "Kedro DE"
+            "Kedro-DE"
          ]
       }
    ]
