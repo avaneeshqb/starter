@@ -1,0 +1,54 @@
+Description: This template provides a basic SageMaker Pipeline and the event rules to trigger it.
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Name of the bucket in which the pipeline is stored.
+
+Resources:
+  E2EPipeline:
+    Type: AWS::SageMaker::Pipeline
+    Properties: 
+      PipelineName: "e2e-pipeline"
+      PipelineDisplayName: "E2E-Pipeline"
+      PipelineDescription: "The e2e sagemaker pipeline that runs Kedro and MLOps functionality."
+      PipelineDefinition: 
+        PipelineDefinitionS3Location:
+          Bucket: !Ref S3BucketName
+          Key: pipeline.json
+      RoleArn: !ImportValue sagemaker-general-role
+
+  EventTriggerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - events.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: default
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sagemaker:ListPipelines
+                  - sagemaker:StartPipelineExecution
+                Resource: !Sub arn:aws:sagemaker:us-east-1:230466917286:pipeline/${E2EPipeline}
+
+  TriggerPipelineTimeBased:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: "Rule to trigger the sagemaker pipeline based on a set time schedule"
+      State: "ENABLED"
+      ScheduleExpression: rate(12 hours)
+      Targets:
+        - Id: SageMaker-Pipeline
+          Arn: !Sub arn:aws:sagemaker:us-east-1:230466917286:pipeline/${E2EPipeline}
+          RoleArn: !GetAtt EventTriggerRole.Arn
