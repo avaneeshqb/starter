@@ -69,16 +69,18 @@ data_processing.preprocessed_shuttles:
 model_input_table:
   type: pandas.ParquetDataSet
   filepath: data/03_primary/model_input_table.pq
+  # filepath: {{cookiecutter.output_s3bucket}}/data/03_primary/model_input_table.pq
   layer: primary
 
 data_science.active_modelling_pipeline.regressor:
   type: pickle.PickleDataSet
   filepath: data/06_models/regressor_active.pickle
+  # filepath: {{cookiecutter.output_s3bucket}}/data/06_models/regressor_active.pickle
   versioned: true
   layer: models
 
 data_science.candidate_modelling_pipeline.regressor:
   type: pickle.PickleDataSet
-  filepath: data/06_models/regressor_candidate.pickle
+  filepath: {{cookiecutter.output_s3bucket}}/data/06_models/regressor_candidate.pickle
   versioned: true
   layer: models

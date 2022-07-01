@@ -3,5 +3,6 @@
     "repo_name": "{{ cookiecutter.project_name.replace(' ', '-').lower().strip('-') }}",
     "python_package": "{{ cookiecutter.project_name.replace(' ', '_').replace('-', '_').lower() }}",
     "kedro_version": "{{ cookiecutter.kedro_version }}",
-    "ecr_repo": "<INSERT-ECR-REPO-NAME>"
+    "ecr_repo": "<INSERT-ECR-REPO-NAME>",
+    "output_s3bucket": "s3:<your-output-bucket>"
 }

@@ -33,3 +33,10 @@ ecr_repo:
     Please enter the link of ECR Repo you'd like to build your code to. 
   regex_validator: (?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*|<INSERT-ECR-REPO-NAME>
   error_message: The name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, periods and forward slashes.
+
+output_s3bucket:
+  title: "Output S3 Bucket"
+  text: |
+    Please enter the s3 bucket where you want to output your pipeline outputs. eg: s3a://your_bucket/data/01_raw/weather*
+  regex_validator: (?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*|<INSERT-ECR-REPO-NAME>
+  error_message: The name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, periods and forward slashes.
